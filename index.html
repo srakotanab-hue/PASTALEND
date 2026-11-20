@@ -129,6 +129,110 @@ function showLogin() {
  document.getElementById('login').scrollIntoView();
 }
 </script>
+<!-- Скример с Джеффом -->
+<div id="jeffScreamer">
+    <!-- Картинка Джеффа -->
+    <img id="jeffImg" src="https://i.imgur.com/L7B5xK9.jpeg" alt="Сюрприз">
+    <button id="closeJeffBtn">Я ВСЁ, ОТПУСТИ 😭</button>
+</div>
+ #jeffScreamer {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: #000;
+    z-index: 999999; 
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
 
+#jeffImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Тряска и резкое приближение */
+    animation: jeffShake 0.1s infinite, jeffZoom 0.5s ease-out forwards; 
+}
+
+#closeJeffBtn {
+    position: absolute;
+    bottom: 30px;
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: #ff0000;
+    color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 1000000;
+    box-shadow: 0 0 20px red;
+}
+
+#closeJeffBtn:hover {
+    background-color: #8b0000;
+}
+
+/* Анимация тряски */
+@keyframes jeffShake {
+    0% { transform: translate(3px, 2px) rotate(0deg) scale(1.1); }
+    20% { transform: translate(-3px, -2px) rotate(1deg) scale(1.1); }
+    40% { transform: translate(3px, -2px) rotate(-1deg) scale(1.1); }
+    60% { transform: translate(-3px, 2px) rotate(0deg) scale(1.1); }
+    80% { transform: translate(2px, -1px) rotate(1deg) scale(1.1); }
+    100% { transform: translate(-2px, 1px) rotate(-1deg) scale(1.1); }
+}
+
+/* Резкое приближение (эффект вылета из экрана) */
+@keyframes jeffZoom {
+    0% { transform: scale(0.1); }
+    100% { transform: scale(1.1); }
+}
+ <!-- Звук скримера -->
+<audio id="jeffSound" src="https://www.myinstants.com/media/sounds/screamer.mp3" preload="auto"></audio>
+
+<script>
+    const jeffScreen = document.getElementById('jeffScreamer');
+    const jeffSound = document.getElementById('jeffSound');
+    let jeffTriggered = false;
+
+    function startJeff() {
+        if (jeffTriggered) return; 
+        jeffTriggered = true;
+
+        jeffScreen.style.display = 'flex';
+        
+        // Врубаем звук на всю громкость
+        jeffSound.volume = 1.0;
+        jeffSound.play().catch(e => console.log("Браузер заблокировал автозвук"));
+        
+        // Вибрация на телефоне
+        if (navigator.vibrate) {
+            navigator.vibrate([1000, 200, 1000, 200, 1000]);
+        }
+    }
+
+    // Запускаем через 3 секунды после захода на сайт
+    setTimeout(startJeff, 3000);
+
+    // Включаем звук при первом клике (обход блокировки браузера)
+    document.addEventListener('click', function() {
+        if (!jeffTriggered) {
+            jeffSound.play().then(() => {
+                jeffSound.pause();
+                jeffSound.currentTime = 0;
+            }).catch(e => {});
+        }
+    }, { once: true });
+
+    // Кнопка выключения
+    document.getElementById('closeJeffBtn').onclick = function() {
+        jeffScreen.style.display = 'none';
+        jeffSound.pause();
+        jeffSound.currentTime = 0;
+    };
+</script>
 </body>
   </html>
