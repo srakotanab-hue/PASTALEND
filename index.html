@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PASTALEND</title>
+
+<style>
+* {box-sizing:border-box}
+body {
+ margin:0;
+ background:#090914;
+ color:white;
+ font-family:Arial,sans-serif;
+}
+header {
+ padding:22px;
+ background:#151329;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+.logo {
+ font-size:26px;
+ font-weight:bold;
+ color:#a879ff;
+}
+button {
+ border:0;
+ border-radius:10px;
+ padding:12px 20px;
+ background:#874cff;
+ color:white;
+ cursor:pointer;
+}
+.hero {
+ text-align:center;
+ padding:75px 20px;
+}
+.hero h1 {
+ font-size:48px;
+ color:#a879ff;
+}
+.container {
+ max-width:1000px;
+ margin:auto;
+ padding:20px;
+}
+.grid {
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:18px;
+}
+.card {
+ background:#17152a;
+ padding:22px;
+ border-radius:16px;
+ border:1px solid #373052;
+}
+.card h3 {color:#b18aff}
+input {
+ display:block;
+ width:100%;
+ padding:13px;
+ margin:12px 0;
+ border-radius:9px;
+ border:1px solid #555;
+ background:#111;
+ color:white;
+}
+footer {
+ text-align:center;
+ padding:30px;
+ color:#888;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">👑 PASTALEND</div>
+<button onclick="showLogin()">Войти</button>
+</header>
+
+<section class="hero">
+<h1>PASTALEND</h1>
+<p>Твоя территория скриптов и игровых возможностей.</p>
+<button onclick="document.getElementById('catalog').scrollIntoView()">Открыть каталог</button>
+</section>
+
+<div class="container" id="catalog">
+<h2>🔥 Популярное</h2>
+<div class="grid">
+<div class="card">
+<h3>⚡ Скрипты</h3>
+<p>Коллекция игровых скриптов.</p>
+<button>Подробнее</button>
+</div>
+
+<div class="card">
+<h3>👑 Избранное</h3>
+<p>Твои любимые материалы.</p>
+<button onclick="showLogin()">Открыть</button>
+</div>
+
+<div class="card">
+<h3>💎 Профиль</h3>
+<p>Твой личный кабинет.</p>
+<button onclick="showLogin()">Войти</button>
+</div>
+</div>
+</div>
+
+<div class="container" id="login" style="display:none">
+<h2>👤 Вход / Регистрация</h2>
+<input placeholder="Твой ник">
+<input type="password" placeholder="Пароль">
+<button onclick="alert('Демонстрационная форма! Настоящая регистрация появится позже.')">Продолжить</button>
+</div>
+
+<footer>
+PASTALEND © 2026
+</footer>
+
+<script>
+function showLogin() {
+ document.getElementById('login').style.display='block';
+ document.getElementById('login').scrollIntoView();
+}
+</script>
+
+</body>
+  </html>
